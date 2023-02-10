@@ -79,3 +79,20 @@ Hàm không tên, ẩn danh, anonymous function
 - Gán vào 1 biến
 - Kiểu dữ liệu sẽ trả về dạng function
 - Định nghĩa hàm trước khi gọi
+
+Vòng lặp
+
+Đoạn chương trình được lặp lại theo 1 số lần xác định hoặc không xác định (Dựa vào biểu thức) để thực hiện 1 bài toán
+
+1. Vòng lặp for: Lặp với số lần lặp xác định trước
+
+- Vòng lặp for tăng
+- Vòng lặp for giảm
+- Vòng lặp lồng nhau
+
+2. Vòng lặp while và do while: Lặp với số lần lặp không xác định trước
+
+- while => Kiểm tra điều kiện trước sau đó thực hiện chương trình
+- do while => Thực hiện chương trình trước rồi kiểm tra điều kiện
+
+=> Ngoài ra: Các kiểu dữ liệu khác nhau sẽ có các vòng lặp khác nhau (Array)
