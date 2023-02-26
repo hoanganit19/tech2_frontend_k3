@@ -82,3 +82,9 @@ console.log("======");
 Object.keys(comments).forEach(function (key) {
   console.log(comments[key]);
 });
+
+// console.log([Object]);
+
+var user = Object.create(null); //Tạo object không có prototype (Không kế thừa)
+
+console.log(user);

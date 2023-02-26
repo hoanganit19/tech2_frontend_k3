@@ -52,6 +52,13 @@ console.log(search);
 
 var tr = "";
 //Vỏng lặp => nối html vào biến tr
+customers.forEach(function ({ name, email }, index) {
+  tr += ` <tr>
+  <td>${index + 1}</td>
+  <td>${name}</td>
+  <td>${email}</td>
+</tr>`;
+});
 
 var html = `<table border="1" width="100%" cellpadding="0" cellspacing="0">
 <thead>
@@ -62,11 +69,7 @@ var html = `<table border="1" width="100%" cellpadding="0" cellspacing="0">
     </tr>
 </thead>
 <tbody>
-    <tr>
-        <td>1</td>
-        <td>Hoàng An</td>
-        <td>hoangan.web@gmail.com</td>
-    </tr>
+   ${tr}
 </tbody>
 </table>`;
 document.write(html);
