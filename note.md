@@ -96,3 +96,16 @@ Vòng lặp
 - do while => Thực hiện chương trình trước rồi kiểm tra điều kiện
 
 => Ngoài ra: Các kiểu dữ liệu khác nhau sẽ có các vòng lặp khác nhau (Array)
+
+# DOM
+
+Các thao tác với DOM:
+
+- Thay đổi nội dung các thẻ html
+- Thêm nội dung vào thẻ html
+- Xóa nội dung thẻ html
+- Xóa thẻ html
+- Thêm thẻ html
+- Thay đổi thẻ html
+- Thêm, sửa, xóa các thuộc tính thẻ html
+- Chính sửa CSS (Inline) của thẻ html
