@@ -109,3 +109,10 @@ Các thao tác với DOM:
 - Thay đổi thẻ html
 - Thêm, sửa, xóa các thuộc tính thẻ html
 - Chính sửa CSS (Inline) của thẻ html
+
+## Dom Navigation
+
+- Lên cấp cha: parentElement
+- Xuống cấp con: chilren, node.querySelector() hoặc node.querySelectorAll()
+- Next tới 1 element ngang hàng: nextElementSibling
+- Prev 1 element ngang hàng: previousElementSibling
