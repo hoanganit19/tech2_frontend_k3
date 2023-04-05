@@ -2,6 +2,7 @@ var modalToggle = document.querySelectorAll('[data-toggle="modal"]');
 var modalDismiss = document.querySelectorAll('[data-dismiss="modal"]');
 var modalBg = document.createElement("div");
 modalBg.classList.add("modal-bg");
+
 if (modalToggle.length) {
   modalToggle.forEach(function (modalToggleItem) {
     modalToggleItem.addEventListener("click", function (e) {
@@ -34,6 +35,14 @@ if (modalDismiss.length) {
       if (activeModal !== null) {
         activeModal.classList.remove("open");
         document.body.removeChild(modalBg);
+
+        var customEvent = new CustomEvent("modal.hidden", {
+          detail: {
+            closeType: "dismiss",
+          },
+        });
+
+        activeModal.dispatchEvent(customEvent);
       }
     });
   });
@@ -45,6 +54,12 @@ document.addEventListener("keyup", function (e) {
     if (activeModal !== null) {
       activeModal.classList.remove("open");
       document.body.removeChild(modalBg);
+      var customEvent = new CustomEvent("modal.hidden", {
+        detail: {
+          closeType: "Escape",
+        },
+      });
+      activeModal.dispatchEvent(customEvent);
     }
   }
 });
@@ -54,9 +69,28 @@ modalBg.addEventListener("click", function () {
   if (activeModal !== null) {
     activeModal.classList.remove("open");
     document.body.removeChild(modalBg);
+    var customEvent = new CustomEvent("modal.hidden", {
+      detail: {
+        closeType: "Background",
+      },
+    });
+    activeModal.dispatchEvent(customEvent);
   }
 });
 
-document.addEventListener("mousedown", function (e) {
-  console.log(e);
+// document.addEventListener("mousedown", function (e) {
+//   console.log(e);
+// });
+
+var modal01 = document.querySelector("#modal_01");
+modal01.addEventListener("modal.hidden", function (e) {
+  console.log("Bạn vừa tắt modal bằng cách: " + e.detail.closeType);
 });
+
+/*
+Quy trình tạo ra 1 custom event
+- Tạo đối tượng event bằng cách sử dụng cú pháp: eventObj = new Event('ten event')
+- Xác định dom node cần trigger event thông qua cú pháp: elementNode.dispatchEvent(eventObj)
+
+elementNode.addEventListener('ten event', callback);
+*/
