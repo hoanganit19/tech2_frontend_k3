@@ -116,3 +116,45 @@ Các thao tác với DOM:
 - Xuống cấp con: chilren, node.querySelector() hoặc node.querySelectorAll()
 - Next tới 1 element ngang hàng: nextElementSibling
 - Prev 1 element ngang hàng: previousElementSibling
+
+# API
+
+- Giao tiếp giữa client vs server
+- Hay còn gọi là ajax (Kỹ thuật, công nghệ) = Asynchronous JavaScript And XML
+
+Khi sử dụng Javascript giao tiếp với Server bằng những cách nào?
+
+- XmlHttpRequest() => Không trả về promise
+- fetch() => Trả về 1 promise (ES6, dùng để xử lý bất đồng bộ)
+- jquery ajax => thư viện
+- axios => thư viện
+
+Cấu tạo của API
+
+- URL = Base Url + Endpoint + Params (http://localhost:3000/users?id=1&query=abc)
+- Http Method:
+
+* GET => Lấy dữ liệu từ server về
+* POST => Đẩy dữ liệu từ client lên server (Thêm mới)
+* PUT => Cập nhật dữ liệu từ client lên server (Sửa) => Ghi đè
+* PATCH => Cập nhật dữ liệu từ client lên server (Sửa) => Chỉ cập nhật dữ liệu gửi lên
+* DELETE => Xóa tài nguyên trên server
+
+=> RESTFul API
+
+- Headers
+
+* Request Headers
+* Response Headers
+
+- Body (Data, Payload) => Chỉ tồn tại ở POST, PUT, PATCH
+
+- Http Response Status
+
+* Status Text
+* Status Code
+
+- Authorization (API Key, Bearer, OAuth 2.0,...)
+
+* Headers
+* Body
