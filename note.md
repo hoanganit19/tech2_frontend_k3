@@ -158,3 +158,63 @@ Cấu tạo của API
 
 * Headers
 * Body
+
+Lưu ý khi làm việc với API
+
+- Kiểm tra server đã xử lý thành công hay chưa?
+
+- Server xử lý thành công => Cập nhật UI
+
+- Kiểm tra lỗi xảy ra khi làm việc với API
+
+## Authentication vs Authorization
+
+### Authentication
+
+- Đăng nhập
+- Đăng ký
+
+### Authorization
+
+- Phân quyền
+- Cho phép làm gì
+
+### Quy trình Authentication
+
+1. Đăng nhập
+
+- Gửi request => Server xác thực
+
+* Chính xác => Tạo Token => Trả về cho client
+
+* Không chính xác => Trả vè thông báo lỗi
+
+- Client: Lưu token vào bất kì vị trí nào mong muốn? Cookie, Storage (session, local)
+
+2. Đăng ký
+
+- Gửi request => Server kiểm tra và thêm vào
+
+- Server tạo token => Trả về client
+
+- Client sử dụng token để auto đăng nhập
+
+3. Đăng xuất
+
+- Gửi request => Server xóa token => Trả về trạng thái
+
+- Client xóa token ở trình duyệt: cookie, storage
+
+4. Cập nhật tài khoản
+
+4.1. Lấy thông tin tài khoản
+
+- Call api `/profile` => gửi kèm token (header Authorization Bearer)
+- Server trả về thông tin
+
+* Xác thực đúng => trả về thông tin tk
+* Xác thực sai => Thông báo lỗi
+
+  4.2. Cập nhật thông tin tk
+
+- Call api `/update-profile` để cập nhật
