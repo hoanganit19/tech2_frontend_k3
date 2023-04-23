@@ -2,10 +2,10 @@ if (localStorage.getItem("userLogin")) {
   window.location.href = "ex07.html";
 }
 
-var registerForm = document.querySelector(".register");
+var loginForm = document.querySelector(".login");
 
-var postRegister = async function (user) {
-  var response = await fetch("http://localhost:3000/register", {
+var postLogin = async function (user) {
+  var response = await fetch("http://localhost:3000/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -14,35 +14,27 @@ var postRegister = async function (user) {
   });
   if (response.ok) {
     var data = await response.json();
+
     if (data.accessToken) {
       localStorage.setItem("userLogin", data.accessToken);
       localStorage.setItem("userId", data.user.id);
-      alert("Đăng ký tài khoản thành công");
+      alert("Đăng nhập thành công");
       window.location.href = "ex07.html";
     }
   } else {
-    alert("Email đã bị trùng");
+    alert("Email hoặc mật khẩu không chính xác");
   }
 };
 
-registerForm.addEventListener("submit", function (e) {
+loginForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  var nameNode = this.querySelector('[name="name"]');
   var emailNode = this.querySelector('[name="email"]');
   var passwordNode = this.querySelector('[name="password"]');
-
-  var name = nameNode.value;
   var email = emailNode.value;
   var password = passwordNode.value;
 
-  postRegister({ name, email, password });
+  postLogin({ email, password });
 
-  nameNode.value = "";
   emailNode.value = "";
   passwordNode.value = "";
 });
-
-//Kiểm tra trạng thái đăng nhập
-if (localStorage.getItem("userLogin")) {
-  console.log("Bạn đã đăng nhập");
-}
