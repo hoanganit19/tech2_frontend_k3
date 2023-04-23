@@ -223,4 +223,53 @@ Lưu ý khi làm việc với API
 
 # Npm
 
+- Cài thư viện:
+
+* Download toàn thư viện về máy => Copy vào folder project => Nhúng vào thông qua thẻ script
+* Sử dụng CDN
+
+Nhược điểm
+
+- Quá trình cài đặt mất thời gian
+- Khi chuyển đổi mã nguồn (git) => Đưa cả các thư viện lên => Bộ source rất nặng
+
+Giải pháp:
+
+Sử dụng mô hình quản lý thư viện bằng package
+
+- Công cụ quản lý: npm, yarn, npx,...
+- Market lưu trữ các thư viện:
+
+* https://www.npmjs.com/
+* https://yarnpkg.com/
+
+Sử dụng các công cụ quản lý package qua dòng lệnh (Command Line Interface = CLI)
+Học các câu lệnh DOS
+
+Các bước:
+
+- Cài công cụ quản lý: npm, yarn,...
+- Tích hợp package vào trong project
+
+=> Ghi nhớ
+
+- Setup dự án
+- Cài đặt package (global, local)
+- Gỡ package
+- Update package
+
 # Webpack
+
+- Cài đặt và tích hợp
+- Hỗ trợ: import file js, thư viện trong node_modules
+- Build ra static file
+
+Hỗ trợ import:
+
+- js (mặc định)
+- image
+- json
+- css
+- scss
+- html
+- typescript
