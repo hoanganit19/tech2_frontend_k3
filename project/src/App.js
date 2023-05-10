@@ -1,29 +1,11 @@
-import Navigo from "navigo";
-import Song from "./Pages/Song/Song";
-import Home from "./Pages/Home/Home";
-import Unicode from "./Core/Unicode";
-export default class App extends Unicode {
-  handleClick = (text) => {
-    alert("ok: " + text);
-  };
-
+import { publicRoute } from "./Routes/publicRoute";
+import { protectedRoute } from "./Routes/protectedRoute";
+import Component from "./Core/Component";
+import DefaultLayout from "./Layouts/DefaultLayout";
+export default class App extends Component {
   render = () => {
-    //Thiết lập Routing
-    /*
-    / => Home.js
-    /bai-hat => Song.js
-    /danh-sach-phat => Playlist.js
-    */
+    const layout = this.compile(DefaultLayout);
 
-    const router = new Navigo("/");
-    router.on("/", () => {
-      this.show(Home);
-    });
-
-    router.on("/bai-hat", () => {
-      this.show(Song);
-    });
-
-    router.resolve();
+    return layout;
   };
 }
