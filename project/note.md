@@ -48,3 +48,11 @@ Middleware => Lớp trung gian từ Route vào tới components
 Route => Middleware => Component
 
 Xây dựng từng components theo giao diện
+
+const element = <button onClick={abc}>Click</button>
+
+const btn = documnent.createElement('button');
+btn.innerText = 'Click'
+btn.onclick = abc;
+
+=> Template

@@ -1,3 +1,5 @@
+const prevNodeObj = {};
+let componentChange = null;
 export default class Component {
   constructor(props) {
     this.props = props;
@@ -5,28 +7,38 @@ export default class Component {
   }
 
   setState = (state) => {
-    const keys = Object.keys(state);
+    componentChange = this.constructor.name;
 
+    const keys = Object.keys(state);
     if (keys.length) {
       keys.forEach((key) => {
         this.state[key] = state[key];
       });
 
-      this.show(this); //re-render
+      this.show(prevNodeObj[componentChange], this); //re-render
     }
   };
 
   compile = (Component, args = {}) => {
-    return new Component(args).render();
+    const componentNode = new Component(args).render();
+    const className = new Component().constructor.name;
+    prevNodeObj[className] = componentNode;
+    return componentNode;
   };
 
-  show = (Component, args = {}) => {
-    const app = document.querySelector("#app");
+  show = (prevNode, Component) => {
+    console.log(Component);
     if (typeof Component == "object") {
-      app.innerText = "";
-      app.appendChild(Component.render());
-    } else {
-      app.appendChild(new Component(args).render());
+      const newNode = Component.render();
+
+      prevNode.parentNode.replaceChild(newNode, prevNode);
+
+      prevNodeObj[componentChange] = newNode;
     }
   };
 }
+
+//render()
+//Lấy node từ render() => Lưu vào 1 thuộc tính
+
+//Sau khi update node cũ thành node mới => gán node mới thành node cũ cho lần render sau (giống reduce)

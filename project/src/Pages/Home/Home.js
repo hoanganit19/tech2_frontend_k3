@@ -26,7 +26,7 @@ export default class Home extends Component {
     button.innerText = this.state.btn;
     button.onclick = () => {
       this.setState({
-        title: "Update...",
+        title: "Update..." + Math.random(),
         btn: "Đã update",
       });
     };

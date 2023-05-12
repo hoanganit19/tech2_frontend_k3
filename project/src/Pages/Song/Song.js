@@ -4,12 +4,15 @@ import Component from "../../Core/Component";
 export default class Song extends Component {
   constructor(props) {
     super(props);
-    this.count = 0;
+    this.state = {
+      count: 0,
+    };
   }
 
   handleIncrement = () => {
-    this.count++;
-    this.show(this);
+    this.setState({
+      count: this.state.count + 1,
+    });
   };
 
   render() {
@@ -22,7 +25,7 @@ export default class Song extends Component {
     song.appendChild(this.compile(Input, { name: "age", title: "Tuổi" }));
 
     const h1 = document.createElement("h1");
-    h1.innerText = this.count;
+    h1.innerText = this.state.count;
 
     song.appendChild(h1);
 
