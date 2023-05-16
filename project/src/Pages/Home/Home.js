@@ -11,31 +11,23 @@ export default class Home extends Component {
     };
   }
 
+  handleUpdate = (text) => {
+    console.log(text);
+    this.setState({
+      title: "Update mới",
+    });
+  };
+
   render() {
-    console.log("re-render");
+    const { title } = this.state;
 
-    const h1 = document.createElement("h1");
-    h1.innerText = this.state.title;
-
-    const a = document.createElement("a");
-    a.href = "/bai-hat/10";
-    a.innerText = "Nghe bài hát";
-    a.dataset.link = "";
-
-    const button = document.createElement("button");
-    button.innerText = this.state.btn;
-    button.onclick = () => {
-      this.setState({
-        title: "Update..." + Math.random(),
-        btn: "Đã update",
-      });
-    };
-
-    const element = document.createElement("div");
-    element.appendChild(h1);
-    element.appendChild(a);
-    element.append(button);
-
-    return element;
+    return this.html`
+    <div class="home">
+      <h1>${title}</h1>
+      <button onclick="${() => {
+        this.handleUpdate("Unicode");
+      }}">Update</button>
+    </div>
+    `;
   }
 }

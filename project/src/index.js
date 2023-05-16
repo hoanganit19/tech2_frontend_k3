@@ -6,9 +6,11 @@ const router = new Navigo("/");
 
 const appNode = new App().render();
 
-if (appNode !== undefined) {
-  app.appendChild(appNode);
-}
+// if (appNode !== undefined) {
+//   app.appendChild(appNode);
+// }
+
+app.innerHTML = appNode;
 
 //Lấy tất cả thẻ a có data-attribute là data-link
 const links = app.querySelectorAll("[data-link]");
@@ -17,8 +19,7 @@ if (links.length) {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       router.navigate(e.target.getAttribute("href"));
-      app.innerText = "";
-      new App().render();
+      app.innerHTML = appNode;
     });
   });
 }
