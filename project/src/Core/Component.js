@@ -7,9 +7,19 @@ export default class Component {
     this.state = {};
   }
 
+  minifyHtml = (input) => {
+    const output = input
+      .replace(/\<\!--\s*?[^\s?\[][\s\S]*?--\>/g, "")
+      .replace(/\>\s*\</g, "><")
+      .trim();
+    return output;
+  };
+
   setState = (state) => {
+    const app = document.querySelector("#app");
     componentChange = this.constructor.name;
     const prevRender = this.render();
+    const appContent = new App().render();
 
     const keys = Object.keys(state);
     if (keys.length) {
@@ -17,11 +27,9 @@ export default class Component {
         this.state[key] = state[key];
       });
 
-      const app = document.querySelector("#app");
-
       const render = this.render();
 
-      const newContent = app.innerHTML.replace(prevRender, render);
+      const newContent = appContent.replace(prevRender, render);
 
       app.innerHTML = newContent;
 
@@ -56,7 +64,7 @@ export default class Component {
         },
         [first]
       )
-      .filter((item) => (item && item !== true) || item == 0)
+      .filter((item) => (item && item !== true) || item === 0)
       .map((item) => {
         if (typeof item === "function") {
           window[currentClass + item.name] = item;
@@ -64,7 +72,6 @@ export default class Component {
         }
         return item;
       });
-
     return result.join("");
   };
 }
