@@ -56,3 +56,21 @@ btn.innerText = 'Click'
 btn.onclick = abc;
 
 => Template
+
+Fetch API
+
+- Call api => Trả về Data từ API
+
+- setState() => re-render liên tục
+
+Component Lifecycle => Vòng đời components => Mô phỏng quá trình 1 component từ lúc sinh ra cho đến lúc chết
+
+1. constructor()
+
+2. render()
+
+3. componentDidMount() => Sau khi render chạy lần 1 (Chỉ chạy 1 lần)
+
+4. componentDidUpdate() => Chạy từ lần render thứ 2 trở đi (Cứ render thì nó sẽ chạy)
+
+5. componentWillUnmount() => Hay còn gọi là cleanup => Thường được sử dụng để reset lại các biến, thuộc tính, timer

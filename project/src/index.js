@@ -4,7 +4,9 @@ const app = document.querySelector("#app");
 
 const router = new Navigo("/");
 
-const appNode = new App().render();
+const appObj = new App();
+
+const appNode = appObj.render();
 
 // if (appNode !== undefined) {
 //   app.appendChild(appNode);

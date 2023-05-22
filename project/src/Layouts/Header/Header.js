@@ -2,6 +2,7 @@ import Component from "../../Core/Component";
 import Navigation from "./Navigation";
 import Menu from "./Menu";
 import defaultAvatar from "../../Assets/Images/default_avatar.jpg";
+import HttpClient from "../../Services/Api/HttpClient";
 
 export default class Header extends Component {
   constructor() {
@@ -9,7 +10,12 @@ export default class Header extends Component {
     this.state = {
       isFocusSearch: false,
       isShowAccount: false,
+      menus: [],
     };
+
+    this.client = new HttpClient(
+      `https://my-json-server.typicode.com/citayesh/menu-api`
+    );
 
     document.addEventListener("click", () => {
       this.handleFocusOutInput();
@@ -21,7 +27,28 @@ export default class Header extends Component {
         this.handleHideAccount();
       }
     });
+
+    //console.log("constructor");
   }
+
+  // componentDidUpdate = (prevState) => {
+  //   console.log(prevState, this.state);
+  //   console.log("component Did update");
+  // };
+
+  componentDidMount = () => {
+    //console.log("component Did mount");
+    this.getMenus();
+  };
+
+  getMenus = async () => {
+    const { res, data } = await this.client.get("/menu");
+    if (res.ok) {
+      this.setState({
+        menus: data,
+      });
+    }
+  };
 
   handleFocusOutInput = () => {
     if (this.state.isFocusSearch) {
@@ -56,9 +83,9 @@ export default class Header extends Component {
   };
 
   render() {
-    const { isFocusSearch, isShowAccount } = this.state;
+    const { isFocusSearch, isShowAccount, menus } = this.state;
 
-    return this.html`
+    const header = this.html`
     <header class="header">
       <div class="row">
         <div class="col-3">
@@ -74,10 +101,7 @@ export default class Header extends Component {
         <div class="col-6">
           <nav class="header__menu">
             <ul>
-              <li><a href="">Home</a></li>
-              <li><a href="">Home</a></li>
-              <li><a href="">Home</a></li>
-              <li><a href="">Home</a></li>
+              ${menus.map(({ title }) => `<li><a href="#">${title}</a></li>`)}
             </ul>
           </nav>
         </div>
@@ -88,15 +112,15 @@ export default class Header extends Component {
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input onfocus="${
                   this.handleFocusInput
-                }"  type="search" placeholder="Search">
+                }" type="search" placeholder="Search">
               </div>
             </form>
             <div class="header__right--account">
                 <span onclick="${this.handleToggle}">
-                  <img src="${defaultAvatar}" />
+                  <img src="${defaultAvatar}">
                 </span>
                 <ul class="${isShowAccount && "show"}">
-                  <li><a href="">Settings</a</li>
+                  <li><a href="">Settings</a></li>
                   <li><a href="">Login</a></li>
                 </ul>
             </div>
@@ -105,5 +129,6 @@ export default class Header extends Component {
       </div>
     </header>
     `;
+    return header;
   }
 }

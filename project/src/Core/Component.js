@@ -1,16 +1,26 @@
 import App from "../App";
 const prevNodeObj = {};
 let componentChange = null;
+const renderCount = {};
 export default class Component {
   constructor(props) {
     this.props = props;
     this.state = {};
+    setTimeout(() => {
+      if (renderCount[this.constructor.name] === undefined) {
+        this.executeComponentDidMount(this);
+        renderCount[this.constructor.name] = 1;
+      }
+    }, 0);
   }
 
   minifyHtml = (input) => {
     const output = input
       .replace(/\<\!--\s*?[^\s?\[][\s\S]*?--\>/g, "")
       .replace(/\>\s*\</g, "><")
+      .replace(/>\s+|\s+</g, function (m) {
+        return m.trim();
+      })
       .trim();
     return output;
   };
@@ -18,20 +28,34 @@ export default class Component {
   setState = (state) => {
     const app = document.querySelector("#app");
     componentChange = this.constructor.name;
-    const prevRender = this.render();
-    const appContent = new App().render();
+    const prevRender = this.minifyHtml(this.render());
+    //const appContent = new App().render();
+    const appContent = this.minifyHtml(app.innerHTML);
 
     const keys = Object.keys(state);
+
+    const prevState = JSON.parse(JSON.stringify(this.state));
+
     if (keys.length) {
       keys.forEach((key) => {
         this.state[key] = state[key];
       });
 
-      const render = this.render();
+      const render = this.minifyHtml(this.render());
 
       const newContent = appContent.replace(prevRender, render);
 
       app.innerHTML = newContent;
+
+      //renderCount++;
+      renderCount[this.constructor.name]++;
+
+      if (
+        renderCount[this.constructor.name] >= 2 &&
+        typeof this.componentDidUpdate === "function"
+      ) {
+        this.componentDidUpdate(prevState);
+      }
 
       //this.show(prevNodeObj[componentChange], this); //re-render
     }
@@ -73,6 +97,12 @@ export default class Component {
         return item;
       });
     return result.join("");
+  };
+
+  executeComponentDidMount = (obj) => {
+    if (typeof obj.componentDidMount === "function") {
+      obj.componentDidMount();
+    }
   };
 }
 
